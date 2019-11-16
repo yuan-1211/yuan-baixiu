@@ -88,3 +88,18 @@ $('#userBox').on('click','.delete',function(){
         });
     }
 });
+let selectAll=$('#selectAll')
+selectAll.on('click',function(){
+    let status= $(this).prop('checked')
+    $('#userBox').find('input').prop('checked',status)
+});
+$('#userBox').on('change','#userStatus',function(){
+    let inputs=$('#userBox').find('input');
+    if(inputs.length==inputs.filter(':checked').length){
+        selectAll.prop('checked',true)
+    }else(
+        selectAll.prop('checked',false)
+
+    )
+    
+})
