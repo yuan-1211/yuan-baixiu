@@ -88,18 +88,46 @@ $('#userBox').on('click','.delete',function(){
         });
     }
 });
-let selectAll=$('#selectAll')
+let selectAll=$('#selectAll');
+let deleteMany= $('#deleteMany')
+//全选按钮状态
 selectAll.on('click',function(){
-    let status= $(this).prop('checked')
-    $('#userBox').find('input').prop('checked',status)
+    let status= $(this).prop('checked');
+    if(status){
+        deleteMany.show()
+    }else(
+        deleteMany.hide()
+    )
+    $('#userBox').find('input').prop('checked',status);
 });
+//复选框状态改变时全选框的状态
 $('#userBox').on('change','#userStatus',function(){
     let inputs=$('#userBox').find('input');
     if(inputs.length==inputs.filter(':checked').length){
         selectAll.prop('checked',true)
     }else(
         selectAll.prop('checked',false)
-
+    )
+    if(inputs.filter(':checked').length>0){
+        deleteMany.show()
+    }else(
+        deleteMany.hide()
     )
     
+});
+deleteMany.on('click',function(){ 
+    let  id=[]
+    let input=$('#userBox').find('input').filter(':checked')
+    input.each( function (index, element) {  
+        id.push($(element).attr('data-id'));
+    });
+    if(confirm('确定要删除？')){
+    $.ajax({
+        type: "delete",
+        url: `/users/`+id.join('-'),
+        success: function (response) {
+            location.reload()
+        }
+    });
+}
 })
