@@ -56,7 +56,7 @@ $('#userBox').on('click','.edit',function(){
         
         }
     });
-})
+});
 $('#modifyBox').on('submit','#user-form',function(){
     let modifyData=$(this).serialize()
     let id=$(this).attr('data-id')
@@ -75,4 +75,16 @@ $('#modifyBox').on('submit','#user-form',function(){
    });
     return false;
     
-})
+});
+$('#userBox').on('click','.delete',function(){
+    if (confirm('你确定要退出吗')){
+        let id=$(this).attr('data-id')
+        $.ajax({
+            type: "delete",
+            url: `/users/${id}`,
+            success: function (response) {
+                location.reload()
+            }
+        });
+    }
+});
