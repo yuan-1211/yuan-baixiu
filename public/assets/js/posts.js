@@ -57,4 +57,45 @@ function formateDate(date) {
     });
     return false
   })
+  $('#postBox').on('click','.delete',function(){
+      let id=$(this).attr('data-id')
+     if(confirm('确定要删除？')) {
+          $.ajax({
+          type: "DELETE",
+          url: `/posts/${id}`,
+          success: function (response) {
+              location.reload()
+          }
+      });
+     }
+  })
+        var id, userId;
+        $('#postBox').on('click', ".postCom", function () {
+            id = $(this).data('id')
+            console.log(id, 678);
+            userId = JSON.parse(localStorage.getItem('user'))._id
+            console.log(userId, 444);
+            $('#exampleModal').modal('show')
+        })
+
+        /* 点击发布 */
+        $('.addCom').on('click', function () {
+            var content = $('#message-text').val()
+            console.log(content, 1111);
+            $.ajax({
+            type: 'post',
+            url: '/comments',
+            data: {
+                author: userId,
+                content: content,
+                post: id
+            },
+            success: function (res) {
+                console.log(res, 543);
+                $('#exampleModal').modal('hide')
+            }
+            })
+        })
+   
+
 
