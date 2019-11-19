@@ -25,3 +25,13 @@ $.ajax({
           })
     }
 });
+$.ajax({
+    type: "get",
+    url: "/posts/lasted",
+ 
+    success: function (response) {
+        let html=template('lastedTpl',{data:response})
+        $('#lastedBox').html(html)
+        
+    }
+});
