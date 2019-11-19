@@ -46,7 +46,12 @@
         },
         success: function (response) {
           localStorage.setItem('user',JSON.stringify(response))
-          location.href='./index.html'
+          if(response.role=='admin'){
+                location.href='/admin/index.html'
+          }else{
+            location.href='/index.html'
+          }
+         
           //location.assign('index.html')等价于location.href='./index.html'  有历史记录
           // location.replace('index.html')  没有历史记录
         },
