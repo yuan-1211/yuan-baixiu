@@ -27,3 +27,13 @@ $('#logout').on('click',function(){
     date = new Date(date);
     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
   }
+  function getId(id){
+    let params= location.search.substr(1).split('&')
+     for (let i = 0; i < params.length; i++) {
+         let arr= params[i].split('=')
+         if(arr[0]==id){
+             return arr[1]
+         }
+         return -1       
+     }  
+ }

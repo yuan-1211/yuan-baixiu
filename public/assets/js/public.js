@@ -66,3 +66,8 @@ $.ajax({
 		$('#topNavBox').html(html)  //顶部导航栏（缩小窗口可以看见）
 	}
 })
+$('.search form').on('submit',function(){
+	let key=$(this).find('.keys').val()
+	location.href='search.html?key='+key
+	return false
+})
